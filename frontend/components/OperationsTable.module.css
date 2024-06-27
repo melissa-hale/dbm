@@ -1,0 +1,29 @@
+.tableContainer {
+    max-height: 400px; /* Adjust height as needed */
+    overflow-y: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.thead {
+    background-color: #f2f2f2;
+    position: sticky;
+    top: 0;
+}
+
+.th, .td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.trEven {
+    background-color: #f9f9f9;
+}
+
+.trHover:hover {
+    background-color: #f1f1f1;
+}
