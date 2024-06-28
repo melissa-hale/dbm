@@ -13,4 +13,4 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-CMD ["sh", "-c", "python -m app.db.init_db && uvicorn app.main:app --host :: --port 8000"]
+CMD ["sh", "-c", "python -m app.db.init_db && uvicorn app.main:app --host :: --port ${PORT}"]
