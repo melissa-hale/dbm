@@ -20,7 +20,7 @@ def backup(mongo_uri: str):
     backup_file = f"backup_{timestamp}.gz"
     
     try:
-        logger.info(f"Starting backup from Atlas to MinIO as {backup_file}")
+        logger.info(f"Starting backup from Mongo to MinIO as {backup_file}")
 
         # Run mongodump command
         dump_command = [

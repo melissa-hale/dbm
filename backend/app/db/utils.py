@@ -9,22 +9,22 @@ def get_db():
     finally:
         db.close()
 
-def create_operation(db: Session, operation_type: str):
-    db_operation = OperationStatus(operation_type=operation_type, status="Running")
-    db.add(db_operation)
+def create_operation(db: Session, operation_type: str, details: str = None) -> OperationStatus:
+    operation = OperationStatus(operation_type=operation_type, status="Running", details=details, started_at=datetime.utcnow())
+    db.add(operation)
     db.commit()
-    db.refresh(db_operation)
-    return db_operation
+    db.refresh(operation)
+    return operation
 
-def update_operation_status(db: Session, operation_id: int, status: str, details: str = None):
-    db_operation = db.query(OperationStatus).filter(OperationStatus.id == operation_id).first()
-    db_operation.status = status
-    db_operation.completed_at = datetime.utcnow()
-    db_operation.duration = (db_operation.completed_at - db_operation.started_at).total_seconds()
-    db_operation.details = details
+def update_operation_status(db: Session, operation_id: int, status: str, message: str = None):
+    operation = db.query(OperationStatus).filter(OperationStatus.id == operation_id).first()
+    operation.status = status
+    operation.completed_at = datetime.utcnow()
+    if message:
+        operation.message = message
     db.commit()
-    db.refresh(db_operation)
-    return db_operation
+    db.refresh(operation)
+    return operation
 
 def get_operations(db: Session):
     return db.query(OperationStatus).all()
